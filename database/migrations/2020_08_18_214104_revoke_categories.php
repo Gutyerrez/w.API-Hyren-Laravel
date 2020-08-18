@@ -4,9 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PunishCategories extends Migration
+class RevokeCategories extends Migration
 {
-    protected $table = 'punish_categories';
+    protected $table = 'revoke_categories';
 
     public function up()
     {
@@ -15,12 +15,11 @@ class PunishCategories extends Migration
             $table->string('display_name');
             $table->text('description');
             $table->string('group_name');
-            $table->json('durations')->default([]);
             $table->boolean('enabled')->default(false);
 
             $table->foreign('group_name')->references('name')->on('groups')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 
