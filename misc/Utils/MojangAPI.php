@@ -45,7 +45,7 @@ class MojangAPI
         } catch (HttpResponseException $e) {
             return response()->json([
                 'status' => 'fail',
-                'message' => 'Internal server error'
+                'message' => INTERNAL_SERVER_ERROR
             ], 500);
         }
     }

@@ -14,4 +14,10 @@ Route::middleware('authentication')->group(function() {
 
         Route::get('/groups/staff', 'StaffController@index');
     });
+
+    Route::prefix('/changelogs')->group(function() {
+        Route::get('/', 'ChangelogsController@index');
+
+        Route::post('/create', 'ChangelogsController@store');
+    });
 });

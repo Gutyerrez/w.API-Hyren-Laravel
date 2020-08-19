@@ -1,6 +1,7 @@
 <?php
 
 define('LARAVEL_START', microtime(true));
+define('INTERNAL_SERVER_ERROR', 'Internal server error');
 
 require __DIR__.'/../vendor/autoload.php';
 
