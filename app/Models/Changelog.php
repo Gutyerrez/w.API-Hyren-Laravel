@@ -13,4 +13,8 @@ class Changelog extends Model
         'title', 'changes'
     ];
 
+    protected $visible = [
+        'title', 'changes', 'created_at'
+    ];
+
 }

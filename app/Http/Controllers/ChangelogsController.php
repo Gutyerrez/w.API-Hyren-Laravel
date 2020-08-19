@@ -10,14 +10,16 @@ class ChangelogsController extends Controller
 {
 
     public function index(Request $request) {
-        $page = $request->query('page') || 1;
-        $offset = $request->query('offset') || 0;
+        $offset = $request->query('offset', 0);
+        $page = $request->query('page', 10);
 
         try {
-            $changelogs = Changelog::paginate(10);
+            $changelogs = Changelog::skip($offset)->take($page)->get();
 
             return response()->json([
                 'status' => 'ok',
+                'offset' => $offset,
+                'page' => $page,
                 'payload' => $changelogs
             ]);
         } catch (QueryException $e) {
@@ -60,6 +62,30 @@ class ChangelogsController extends Controller
                 'status' => 'fail',
                 'message' => INTERNAL_SERVER_ERROR
             ], 500);
+        }
+    }
+
+    public function delete(Request $request, $id) {
+        try {
+            $deleted = Changelog::where('id', $id)
+                ->delete();
+
+            if (empty($deleted)) {
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => 'Can\'t find a changelog with this id'
+                ], 404);
+            }
+
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'Successfully deleted changelog #' . $id
+            ]);
+        } catch (QueryException $e) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => INTERNAL_SERVER_ERROR
+            ]);
         }
     }
 

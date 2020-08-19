@@ -19,5 +19,7 @@ Route::middleware('authentication')->group(function() {
         Route::get('/', 'ChangelogsController@index');
 
         Route::post('/create', 'ChangelogsController@store');
+
+        Route::delete('/delete/{id}', 'ChangelogsController@delete');
     });
 });
