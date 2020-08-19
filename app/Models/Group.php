@@ -16,11 +16,12 @@ class Group extends Model
     public function users()
     {
         return $this->hasManyThrough(
-            UserGroupDue::class,
             User::class,
+            UserGroupDue::class,
+            'group_name',
             'id',
-            'user_id',
             'name',
+            'user_id'
         );
     }
 }

@@ -3,17 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class StaffController extends Controller
 {
+
     public function index()
     {
-        $users = Group::with('users')->get([
-            'display_name', 'color'
-        ]);
+        try {
+            $users = Group::with('users')->get([
+                'name', 'display_name', 'color',
+            ]);
 
-        return response()->json($users);
+            return response()->json([
+                'status' => 'ok',
+                'payload' => $users
+            ]);
+        } catch(QueryException $e) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'Internal server error.'
+            ]);
+        }
     }
+
 }
