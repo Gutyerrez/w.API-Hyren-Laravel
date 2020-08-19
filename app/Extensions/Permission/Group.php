@@ -7,6 +7,7 @@ use BenSampo\Enum\Enum;
 final class Group extends Enum
 {
     const MASTER = [
+        'name' => 'MASTER',
         'display_name' => 'Master',
         'prefix' => '[Master] ',
         'color' => '#FFAA00',
@@ -15,6 +16,7 @@ final class Group extends Enum
     ];
 
     const MANAGER = [
+        'name' => 'MANAGER',
         'display_name' => 'Manager',
         'prefix' => '[Manager] ',
         'color' => '#AA0000',
@@ -23,6 +25,7 @@ final class Group extends Enum
     ];
 
     const ADMINISTRATOR = [
+        'name' => 'ADMINISTRATOR',
         'display_name' => 'Administrator',
         'prefix' => '[Admin] ',
         'color' => '#FF5555',
@@ -31,6 +34,7 @@ final class Group extends Enum
     ];
 
     const MODERATOR = [
+        'name' => 'MODERATOR',
         'display_name' => 'Moderator',
         'prefix' => '[Moderator] ',
         'color' => '#00AA00',
@@ -39,6 +43,7 @@ final class Group extends Enum
     ];
 
     const HELPER = [
+        'name' => 'HELPER',
         'display_name' => 'Helper',
         'prefix' => '[Helper] ',
         'color' => '#55FF55',
@@ -47,6 +52,7 @@ final class Group extends Enum
     ];
 
     const YOUTUBER = [
+        'name' => 'YOUTUBER',
         'display_name' => 'Youtuber',
         'prefix' => '[YT] ',
         'color' => '#FF5555',
@@ -55,6 +61,7 @@ final class Group extends Enum
     ];
 
     const MVP = [
+        'name' => 'MVP',
         'display_name' => 'MVP',
         'prefix' => '[MVP] ',
         'color' => '#55FFFF',
@@ -63,6 +70,7 @@ final class Group extends Enum
     ];
 
     const VIP = [
+        'name' => 'VIP',
         'display_name' => 'VIP',
         'prefix' => '[VIP] ',
         'color' => '#FFFF55',
@@ -71,6 +79,7 @@ final class Group extends Enum
     ];
 
     const BUILDER = [
+        'name' => 'BUILDER',
         'display_name' => 'Builder',
         'prefix' => '[Builder] ',
         'color' => '#FF55FF',
@@ -79,6 +88,7 @@ final class Group extends Enum
     ];
 
     const DEFAULT = [
+        'name' => 'MEMBER',
         'display_name' => 'Member',
         'prefix' => '',
         'color' => '#AAAAAA',
