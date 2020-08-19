@@ -8,4 +8,6 @@ Route::get('/', function() {
     ]);
 });
 
-Route::get('/users/groups/staff', 'StaffController@index');
+Route::middleware('authentication')->group(function() {
+    Route::get('/users/groups/staff', 'StaffController@index');
+});
