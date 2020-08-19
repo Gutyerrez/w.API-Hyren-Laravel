@@ -3,7 +3,7 @@
 return [
     'name' => 'Hyren API',
     'env' => 'development',
-    'debug' => false,
+    'debug' => true,
     'url' => 'http://localhost',
     'asset_url' => null,
     'timezone' => 'UTC',

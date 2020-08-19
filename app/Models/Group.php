@@ -23,4 +23,14 @@ class Group extends Model
         'discord_role_id'
     ];
 
+    public function users()
+    {
+        return $this->hasManyThrough(
+            'App\Models\User',
+            'App\Models\UserGroupDue',
+            'user_id',
+            'name',
+            'group_name'
+        );
+    }
 }

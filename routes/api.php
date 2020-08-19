@@ -7,3 +7,5 @@ Route::get('/', function() {
         'Hyren API Version' => '0.1-ALPHA'
     ]);
 });
+
+Route::get('/users/groups/staff', 'StaffController@index');
