@@ -9,5 +9,9 @@ Route::get('/', function() {
 });
 
 Route::middleware('authentication')->group(function() {
-    Route::get('/users/groups/staff', 'StaffController@index');
+    Route::prefix('/users')->group(function() {
+        Route::post('/authenticate', 'MojangController@store');
+
+        Route::get('/groups/staff', 'StaffController@index');
+    });
 });
