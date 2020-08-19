@@ -13,7 +13,7 @@ class Changelogs extends Migration
         Schema::create($this->table, function(Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->json('changes')->default([]);
+            $table->json('changes')->default(json_encode([]));
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class Groups extends Migration
 {
-    protected $table;
+    protected $table = 'groups';
 
     public function up()
     {

@@ -15,7 +15,7 @@ class PunishCategories extends Migration
             $table->string('display_name');
             $table->text('description');
             $table->string('group_name');
-            $table->json('durations')->default([]);
+            $table->json('durations')->default(json_encode([]));
             $table->boolean('enabled')->default(false);
 
             $table->foreign('group_name')->references('name')->on('groups')

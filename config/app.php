@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'name' => env('APP_NAME', 'Laravel'),
-    'env' => env('APP_ENV', 'production'),
-    'debug' => (bool) env('APP_DEBUG', false),
-    'url' => env('APP_URL', 'http://localhost'),
-    'asset_url' => env('ASSET_URL', null),
+    'name' => 'Hyren API',
+    'env' => 'development',
+    'debug' => false,
+    'url' => 'http://localhost',
+    'asset_url' => null,
     'timezone' => 'UTC',
     'locale' => 'en',
     'fallback_locale' => 'en',
