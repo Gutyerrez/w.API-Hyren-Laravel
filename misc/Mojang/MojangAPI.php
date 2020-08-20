@@ -1,6 +1,6 @@
 <?php
 
-namespace Misc\Utils;
+namespace Misc\Mojang;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Http;
