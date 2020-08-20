@@ -20,7 +20,9 @@ Route::middleware('authentication')->group(function() {
 
         Route::get('/{user_id}/punishments', 'UsersPunishmentsController@show');
 
-        Route::get('/{user_id}/groups', 'UsersGroupsDueController@show');
+        Route::get('/{user_id}/groups', 'UsersGroupsDueController@index');
+
+        Route::get('/{user_id}/groups/{server}', 'UsersGroupsDueController@show');
 
         Route::get('/groups/staff', 'StaffController@index');
 

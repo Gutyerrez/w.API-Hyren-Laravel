@@ -20,7 +20,7 @@ class ForumsController extends Controller
         }
 
         try {
-            $category = Category::where('id', $category_id);
+            $category = Category::where('id', $category_id)->first();
 
             if (empty($category)) {
                 return response()->json([

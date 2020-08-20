@@ -29,7 +29,7 @@ class CategoriesController extends Controller
     public function show(Request $request, $id)
     {
         try {
-            $category = Category::where('id', $id);
+            $category = Category::where('id', $id)->first();
 
             if (empty($category)) {
                 return response()->json([

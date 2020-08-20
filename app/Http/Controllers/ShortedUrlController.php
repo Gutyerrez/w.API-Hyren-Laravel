@@ -16,7 +16,9 @@ class ShortedUrlController extends Controller
         $page = $request->query('page', 10);
 
         try {
-            $shorted_urls = ShortedUrl::skip($offset)->take($page)->get();
+            $shorted_urls = ShortedUrl::skip($offset)
+                ->take($page)
+                ->get();
             $count = ShortedUrl::count();
 
             $payload = [

@@ -67,7 +67,7 @@ class PostsController extends Controller
         }
 
         try {
-            $user = User::where('id', $user_id);
+            $user = User::where('id', $user_id)->first();
 
             if (empty($user)) {
                 return response()->json([
@@ -76,7 +76,7 @@ class PostsController extends Controller
                 ], 404);
             }
 
-            $thread = Thread::where('id', $thread_id);
+            $thread = Thread::where('id', $thread_id)->first();
 
             if (empty($thread)) {
                 return response()->json([
