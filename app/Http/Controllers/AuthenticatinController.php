@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Middleware\AuthenticationMiddleware;
 
-class AuthenticateController extends Controller
+class AuthenticatinController extends Controller
 {
     const KEY = 'HYREN-APPLICATION-8768-144534578-48788-12345787';
 
