@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
 
-    public function index() {
+    public function index()
+    {
         try {
             $categories = Category::all();
 
@@ -25,7 +26,8 @@ class CategoriesController extends Controller
         }
     }
 
-    public function show(Request $request, $id) {
+    public function show(Request $request, $id)
+    {
         try {
             $category = Category::where('id', $id);
 
@@ -48,7 +50,8 @@ class CategoriesController extends Controller
         }
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $name = $request->input('name');
         $slug = '';
 
@@ -70,7 +73,8 @@ class CategoriesController extends Controller
         }
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $id = $request->input('id');
         $name = $request->input('name');
 
@@ -98,7 +102,8 @@ class CategoriesController extends Controller
         }
     }
 
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
         $id = $request->input('id');
 
         try {
@@ -121,5 +126,4 @@ class CategoriesController extends Controller
             ]);
         }
     }
-
 }

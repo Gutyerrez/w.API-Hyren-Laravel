@@ -9,7 +9,8 @@ class AuthenticateController extends Controller
 {
     const KEY = 'HYREN-APPLICATION-8768-144534578-48788-12345787';
 
-    public static function store(Request $request) {
+    public static function store(Request $request)
+    {
         $origin = $request->input('origin');
 
         if (empty($origin)) {
@@ -32,5 +33,4 @@ class AuthenticateController extends Controller
             'payload' => $encrypted
         ], 200);
     }
-
 }

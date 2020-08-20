@@ -20,9 +20,8 @@ class Threads extends Migration
             $table->boolean('promoted')->default(false);
             $table->boolean('sticky')->default(false);
             $table->boolean('closed')->default(false);
-            $table->integer('views')->default('0');
+            $table->integer('views')->default(0);
             $table->integer('answers')->default(0);
-            $table->boolean('answered')->default(false);
             $table->timestamp('last_reply_at')->useCurrent();
             $table->string('restrict_read')->nullable();
             $table->string('restrict_write')->default(Group::DEFAULT()->key);

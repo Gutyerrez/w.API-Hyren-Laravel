@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class ChangelogsController extends Controller
 {
 
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $offset = $request->query('offset', 0);
         $page = $request->query('page', 10);
 
@@ -30,7 +31,8 @@ class ChangelogsController extends Controller
         }
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $title = $request->input('title');
         $changes = $request->input('changes');
 
@@ -65,7 +67,8 @@ class ChangelogsController extends Controller
         }
     }
 
-    public function delete(Request $request, $id) {
+    public function delete(Request $request, $id)
+    {
         try {
             $deleted = Changelog::where('id', $id)
                 ->delete();
@@ -88,5 +91,4 @@ class ChangelogsController extends Controller
             ]);
         }
     }
-
 }

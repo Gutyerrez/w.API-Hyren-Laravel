@@ -9,4 +9,8 @@ class Post extends Model
 
     protected $table = 'posts';
 
+    protected $fillable = [
+        'thread_id', 'user_id', 'body'
+    ];
+
 }

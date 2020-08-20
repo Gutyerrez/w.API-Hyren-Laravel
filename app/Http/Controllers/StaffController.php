@@ -22,12 +22,11 @@ class StaffController extends Controller
                 'status' => 'ok',
                 'payload' => $users
             ]);
-        } catch(QueryException $e) {
+        } catch (QueryException $e) {
             return response()->json([
                 'status' => 'fail',
                 'message' => 'Internal server error.'
             ]);
         }
     }
-
 }

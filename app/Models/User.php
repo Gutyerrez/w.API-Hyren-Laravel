@@ -17,4 +17,16 @@ class User extends Model
         'name'
     ];
 
+    public function groups()
+    {
+        return $this->hasManyThrough(
+            Group::class,
+            UserGroupDue::class,
+            'user_id',
+            'name',
+            'id',
+            'group_name'
+        );
+    }
+
 }

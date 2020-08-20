@@ -25,6 +25,10 @@ class Posts extends Migration
             $table->foreign('thread_id')->references('id')->on('threads')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
+
+            $table->foreign('parent_id')->references('id')->on('threads')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 

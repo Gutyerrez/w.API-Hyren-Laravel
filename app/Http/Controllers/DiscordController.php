@@ -8,7 +8,8 @@ use Misc\Discord\DiscordAPI;
 class DiscordController extends Controller
 {
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $code = $request->query('code');
 
         if (empty($code)) {
@@ -20,5 +21,4 @@ class DiscordController extends Controller
 
         return DiscordAPI::fetchUserByCode($code);
     }
-
 }
