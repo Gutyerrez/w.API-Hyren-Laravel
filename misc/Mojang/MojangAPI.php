@@ -4,6 +4,7 @@ namespace Misc\Mojang;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Http;
+use Misc\Utils\UUID;
 
 class MojangAPI
 {

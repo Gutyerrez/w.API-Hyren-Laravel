@@ -22,15 +22,15 @@ class AuthenticationController extends Controller
 
         $payload = json_encode([
             'origin' => $origin,
-            'time' => microtime(false),
-            'duration' => 15000
+            'time' => microtime(true),
+            'duration' => 60000
         ]);
 
         $encrypted = AuthenticationMiddleware::encryptOrDecrypt('encrypt', $payload);
 
         return response()->json([
             'status' => 'ok',
-            'payload' => $encrypted
+            'access_token' => $encrypted
         ], 200);
     }
 }
