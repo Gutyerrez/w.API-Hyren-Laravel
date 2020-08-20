@@ -9,4 +9,6 @@ class Forum extends Model
 
     protected $table = 'forums';
 
+    public $timestamps = false;
+
 }

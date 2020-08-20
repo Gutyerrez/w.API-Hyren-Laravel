@@ -2,10 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\AuthenticationController;
 use Closure;
-
-use Firebase\JWT\JWT;
 
 class AuthenticationMiddleware
 {
@@ -15,23 +13,36 @@ class AuthenticationMiddleware
     }
 
     public static function encryptOrDecrypt($action, $string, $origin = null) {
-        if ($action == 'encrypt') {
-            $output = JWT::encode($string, AuthenticateController::KEY);
+        $output = false;
+        $encrypt_method = 'AES-256-CBC';
+        $key = hash('sha256', AuthenticationController::KEY);
 
-            return base64_encode($output);
+        if ($action == 'encrypt') {
+            $ivlen = openssl_cipher_iv_length($encrypt_method);
+            $iv = openssl_random_pseudo_bytes($ivlen);
+
+            $output = openssl_encrypt(
+                $string,
+                $encrypt_method,
+                $key,
+                0,
+                $iv
+            );
+
+            $output = base64_encode($output);
         } else if ($action == 'decrypt') {
             if (empty($string)) {
-                return false;
+                return $output;
             }
 
             $encoded = base64_decode($string);
 
-            $payload = json_decode(JWT::decode($encoded, AuthenticateController::KEY));
+            $payload = openssl_decrypt($encoded, $encrypt_method, $key);
 
             $payload_origin = $payload['origin'];
 
             if ($payload_origin != $origin) {
-                return false;
+                return $output;
             }
 
             $duration = $payload['time'] + $payload['duration'];
@@ -39,13 +50,13 @@ class AuthenticationMiddleware
             $current_time = microtime(false);
 
             if ($current_time > $duration) {
-                return false;
+                return $output;
             }
 
             return true;
         }
 
-        return false;
+        return $output;
     }
 
 }

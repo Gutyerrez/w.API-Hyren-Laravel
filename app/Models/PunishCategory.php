@@ -9,4 +9,6 @@ class PunishCategory extends Model
 
     protected $table = 'punish_categories';
 
+    public $timestamps = false;
+
 }

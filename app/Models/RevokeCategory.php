@@ -9,4 +9,6 @@ class RevokeCategory extends Model
 
     protected $table = 'revoke_categories';
 
+    public $timestamps = false;
+
 }

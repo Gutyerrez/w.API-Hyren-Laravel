@@ -40,9 +40,16 @@ class ThreadsController extends Controller
                 ->take($page)
                 ->get();
 
+            $count = Thread::where('forum_id', $forum_id)->count();
+
+            $payload = [
+                'items' => $threads,
+                'count' => $count
+            ];
+
             return response()->json([
                 'status' => 'ok',
-                'payload' => $threads
+                'payload' => $payload
             ], 200);
         } catch (QueryException $e) {
             return response()->json([
@@ -52,7 +59,7 @@ class ThreadsController extends Controller
         }
     }
 
-    public function show(Request $request, $thread_id)
+    public function show(Request $request, $forum_id, $thread_id)
     {
         if (empty($thread_id)) {
             return response()->json([
@@ -62,7 +69,9 @@ class ThreadsController extends Controller
         }
 
         try {
-            $thread = Thread::where('id', $thread_id);
+            $thread = Thread::where('id', $thread_id)
+                ->where('forum_id', $forum_id)
+                ->first();
 
             if (empty($thread)) {
                 return response()->json([
@@ -119,7 +128,8 @@ class ThreadsController extends Controller
             $post = Post::create([
                 'thread_id' => $thread['id'],
                 'user_id' => $user_id,
-                'body' => $body
+                'body' => $body,
+                'parent_id' => $thread['id']
             ]);
 
             if (empty($post)) {
@@ -129,7 +139,7 @@ class ThreadsController extends Controller
                 ], 500);
             }
 
-            $payload = $thread['posts'] = [ $post ];
+            $payload = $thread['posts'] = [$post];
 
             return response()->json([
                 'status' => 'ok',
@@ -138,7 +148,7 @@ class ThreadsController extends Controller
         });
     }
 
-    public function update(Request $request, $thread_id)
+    public function update(Request $request, $forum_id, $thread_id)
     {
         $title = $request->input('title');
         $body = $request->input('body');
@@ -158,19 +168,22 @@ class ThreadsController extends Controller
             $closed,
             $views,
             $answers,
-            $last_reply_at
+            $last_reply_at,
+            $forum_id
         ) {
-            $updated = Thread::where('id', $thread_id)->update([
-                'title' => $title,
-                'promoted' => $promoted,
-                'sticky' => $sticky,
-                'closed' => $closed,
-                'views' => $views,
-                'answers' => $answers,
-                'last_reply_at' => $last_reply_at
-            ]);
+            $updated = Thread::where('id', $thread_id)
+                ->where('forum_id', $forum_id)
+                ->update([
+                    'title' => $title,
+                    'promoted' => $promoted,
+                    'sticky' => $sticky,
+                    'closed' => $closed,
+                    'views' => $views,
+                    'answers' => $answers,
+                    'last_reply_at' => $last_reply_at
+                ]);
 
-            if ($updated != 1) {
+            if ($updated < 1) {
                 return response()->json([
                     'status' => 'fail',
                     'message' => 'Can\'t update this thread, are there deleted?'
@@ -181,7 +194,7 @@ class ThreadsController extends Controller
                 'body' => $body
             ]);
 
-            if ($updated != 1) {
+            if ($updated < 1) {
                 return response()->json([
                     'status' => 'fail',
                     'message' => 'Can\'t update thread body, are there deleted?'
@@ -208,11 +221,11 @@ class ThreadsController extends Controller
             $deleted = Thread::where('id', $thread_id)
                 ->delete();
 
-            if ($deleted != 1) {
+            if ($deleted < 1) {
                 return response()->json([
                     'status' => 'fail',
                     'message' => 'Can\'t delete this thread, are there deleted?'
-                ], 404);
+                ], 500);
             }
 
             return response()->json([
@@ -226,5 +239,4 @@ class ThreadsController extends Controller
             ], 500);
         }
     }
-
 }

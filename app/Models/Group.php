@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
+
     protected $table = 'groups';
 
     protected $primaryKey = 'name';
 
     public $timestamps = false;
+
     public $keyType = 'string';
 
     public function users()
@@ -24,4 +26,5 @@ class Group extends Model
             'user_id'
         );
     }
+
 }

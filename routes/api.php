@@ -8,6 +8,8 @@ Route::get('/', function() {
     ], 200);
 });
 
+Route::get('/punishments/lasts', 'UsersPunishmentsController@index');
+
 Route::post('/authentication/generate', 'AuthenticationController@store');
 
 Route::middleware('authentication')->group(function() {
@@ -16,17 +18,17 @@ Route::middleware('authentication')->group(function() {
 
         Route::get('/{user_id}', 'UsersController@show');
 
-        Route::post('/authenticate', 'MojangController@store');
+        Route::get('/{user_id}/punishments', 'UsersPunishmentsController@show');
 
-        Route::post('/discord', 'DiscordController@store');
+        Route::get('/{user_id}/groups', 'UsersGroupsDueController@show');
 
         Route::get('/groups/staff', 'StaffController@index');
 
-        Route::get('/groups/{user_id}', 'UsersGroupsDueController@show');
+        Route::post('/discord', 'DiscordController@store');
+
+        Route::post('/authenticate', 'MojangController@store');
 
         Route::post('/groups/create', 'UsersGroupsDueController@store');
-
-        Route::get('/punishments/{user_id}', 'UsersPunishmentsController@show');
     });
 
     Route::prefix('/changelogs')->group(function() {
@@ -48,13 +50,15 @@ Route::middleware('authentication')->group(function() {
     Route::prefix('/forums/{category_id}', 'ForumsController@index');
 
     Route::prefix('/threads')->group(function() {
-        Route::get('/', 'ThreadsController@index');
+        Route::get('/{forum_id}', 'ThreadsController@index');
 
-        Route::get('/{thread_id}', 'ThreadsController@show');
+        Route::get('/{forum_id}/{thread_id}', 'ThreadsController@show');
 
-        Route::put('/{thread_id}', 'ThreadsController@update');
+        Route::put('/{forum_id}/{thread_id}', 'ThreadsController@update');
 
         Route::post('/create', 'ThreadsController@store');
+
+        Route::delete('/delete/{thread_id}', 'ThreadsController@delete');
 
         Route::resource('/posts', 'PostsController')->only([
             'index', 'store', 'update', 'delete'
@@ -64,8 +68,4 @@ Route::middleware('authentication')->group(function() {
     Route::resource('/shorts/urls', 'ShortedUrlController')->only([
         'index', 'show', 'store', 'update', 'delete'
     ]);
-
-    Route::prefix('/punishments')->group(function() {
-        Route::get('/lasts', 'UsersPunishmentsController@index');
-    });
 });

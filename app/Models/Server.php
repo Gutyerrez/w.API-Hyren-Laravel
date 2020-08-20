@@ -9,4 +9,6 @@ class Server extends Model
 
     protected $table = 'servers';
 
+    public $timestamps = false;
+
 }

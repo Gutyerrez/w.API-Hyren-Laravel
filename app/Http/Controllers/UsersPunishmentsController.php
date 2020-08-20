@@ -58,7 +58,7 @@ class UsersPunishmentsController extends Controller
 
         try {
             $punishments = UsersPunishment::where('user_id', $user_id);
-            $count = count($punishments);
+            $count = $punishments->count();
 
             $payload = [
                 'items' => $punishments,

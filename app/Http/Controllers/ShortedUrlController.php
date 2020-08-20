@@ -126,7 +126,7 @@ class ShortedUrlController extends Controller
                 'original_url' => $original_url
             ]);
 
-            if ($updated != 1) {
+            if ($updated < 1) {
                 return response()->json([
                     'status' => 'fail',
                     'message' => 'Please fill all fields'
@@ -156,7 +156,7 @@ class ShortedUrlController extends Controller
         try {
             $updated = ShortedUrl::where('id', $id)->delete();
 
-            if ($updated != 1) {
+            if ($updated < 1) {
                 return response()->json([
                     'status' => 'fail',
                     'message' => 'Please fill all fields'

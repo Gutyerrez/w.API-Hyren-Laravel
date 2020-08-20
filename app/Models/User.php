@@ -14,7 +14,7 @@ class User extends Model
     public $keyType = 'string';
 
     protected $visible = [
-        'name'
+        'name', 'groups'
     ];
 
     public function groups()

@@ -21,7 +21,19 @@ class UsersGroupsDueController extends Controller
         }
 
         try {
-            $user = User::with('groups');
+            $user = User::with('groups')->get()
+                ->map(function($user) {
+                    $groups = $user['groups'];
+
+                    foreach ($groups as $index => $group) {
+                        $groups[$index] = $group['name'];
+                    }
+
+                    return [
+                        'name' => $user['name'],
+                        'groups' => $groups
+                    ];
+                });
 
             if (empty($user)) {
                 return response()->json([
