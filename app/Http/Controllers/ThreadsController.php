@@ -52,7 +52,7 @@ class ThreadsController extends Controller
         }
     }
 
-    public function view(Request $request, $thread_id)
+    public function show(Request $request, $thread_id)
     {
         if (empty($thread_id)) {
             return response()->json([

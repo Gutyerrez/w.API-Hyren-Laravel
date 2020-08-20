@@ -48,9 +48,13 @@ Route::middleware('authentication')->group(function() {
     Route::prefix('/forums/{category_id}', 'ForumsController@index');
 
     Route::prefix('/threads')->group(function() {
-        Route::resource('/', 'ThreadsController')->only([
-            'index', 'view', 'store', 'update', 'delete'
-        ]);
+        Route::get('/', 'ThreadsController@index');
+
+        Route::get('/{thread_id}', 'ThreadsController@show');
+
+        Route::put('/{thread_id}', 'ThreadsController@update');
+
+        Route::post('/create', 'ThreadsController@store');
 
         Route::resource('/posts', 'PostsController')->only([
             'index', 'store', 'update', 'delete'
