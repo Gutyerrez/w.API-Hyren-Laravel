@@ -1,16 +1,16 @@
 <?php
 
 return [
-    'driver' => env('SESSION_DRIVER', 'file'),
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    'driver' => 'lifetime',
+    'lifetime' => 120,
     'expire_on_close' => false,
     'encrypt' => false,
     'files' => storage_path('framework/sessions'),
-    'connection' => env('SESSION_CONNECTION', null),
+    'connection' => null,
     'table' => 'sessions',
     'path' => '/',
-    'domain' => env('SESSION_DOMAIN', null),
-    'secure' => env('SESSION_SECURE_COOKIE'),
+    'domain' => null,
+    'secure' => 'SESSION_SECURE_COOKIE',
     'http_only' => true,
     'same_site' => 'lax',
 ];

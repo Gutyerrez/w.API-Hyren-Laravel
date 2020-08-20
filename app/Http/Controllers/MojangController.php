@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Misc\Utils\MojangAPI;
+use Misc\Mojang\MojangAPI;
 
 class MojangController extends Controller
 {

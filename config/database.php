@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default' => env('DB_CONNECTION'),
+    'default' => 'pgsql',
     'connections' => [
         'pgsql' => [
             'driver' => 'pgsql',
@@ -14,6 +14,5 @@ return [
         ],
     ],
     'migrations' => 'migrations',
-    'redis' => [
-    ],
+    'redis' => [ ],
 ];
