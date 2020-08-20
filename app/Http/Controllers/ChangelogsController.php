@@ -15,14 +15,20 @@ class ChangelogsController extends Controller
         $page = $request->query('page', 10);
 
         try {
-            $changelogs = Changelog::skip($offset)->take($page)->get();
+            $changelogs = Changelog::skip($offset)
+                ->take($page)
+                ->get();
+            $count = Changelog::count();
+
+            $payload = [
+                'items' => $changelogs,
+                'count' => $count
+            ];
 
             return response()->json([
                 'status' => 'ok',
-                'offset' => $offset,
-                'page' => $page,
-                'payload' => $changelogs
-            ]);
+                'payload' => $payload
+            ], 200);
         } catch (QueryException $e) {
             return response()->json([
                 'status' => 'fail',
@@ -47,7 +53,10 @@ class ChangelogsController extends Controller
                     'changes' => json_encode($changes)
                 ]);
 
-                return response()->json($changelog);
+                return response()->json([
+                    'status' => 'ok',
+                    'payload' => $changelog
+                ], 201);
             } else {
                 $oldChanges = json_decode($changelog['changes']);
 
@@ -57,7 +66,10 @@ class ChangelogsController extends Controller
 
                 $changelog->save();
 
-                return response()->json($changelog);
+                return response()->json([
+                    'status' => 'ok',
+                    'payload' => $changelog
+                ], 200);
             }
         } catch (QueryException $e) {
             return response()->json([
@@ -83,12 +95,12 @@ class ChangelogsController extends Controller
             return response()->json([
                 'status' => 'ok',
                 'message' => 'Successfully deleted changelog #' . $id
-            ]);
+            ], 200);
         } catch (QueryException $e) {
             return response()->json([
                 'status' => 'fail',
                 'message' => INTERNAL_SERVER_ERROR
-            ]);
+            ], 500);
         }
     }
 }

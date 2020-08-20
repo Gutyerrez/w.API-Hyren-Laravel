@@ -34,7 +34,7 @@ class CategoriesController extends Controller
             if (empty($category)) {
                 return response()->json([
                     'status' => 'fail',
-                    'message' => 'Unknown category'
+                    'message' => 'Category not found'
                 ], 404);
             }
 
@@ -62,9 +62,9 @@ class CategoriesController extends Controller
             ]);
 
             return response()->json([
-                'status' => 'fail',
-                'message' => INTERNAL_SERVER_ERROR
-            ]);
+                'status' => 'ok',
+                'payload' => $category
+            ], 200);
         } catch (QueryException $e) {
             return response()->json([
                 'status' => 'fail',
@@ -87,18 +87,18 @@ class CategoriesController extends Controller
             if ($updated < 1) {
                 return response()->json([
                     'status' => 'fail',
-                    'message' => 'Can\'t find a category #' . $id
+                    'message' => 'Category not found'
                 ], 404);
             }
 
             return response()->json([
                 'status' => 'ok'
-            ]);
+            ], 200);
         } catch (QueryException $e) {
             return response()->json([
                 'status' => 'fail',
                 'message' => INTERNAL_SERVER_ERROR
-            ]);
+            ], 500);
         }
     }
 
@@ -112,18 +112,18 @@ class CategoriesController extends Controller
             if ($updated < 1) {
                 return response()->json([
                     'status' => 'fail',
-                    'message' => 'Can\'t find a category #' . $id
+                    'message' => 'Category not found'
                 ], 404);
             }
 
             return response()->json([
                 'status' => 'ok'
-            ]);
+            ], 200);
         } catch (QueryException $e) {
             return response()->json([
                 'status' => 'fail',
                 'message' => INTERNAL_SERVER_ERROR
-            ]);
+            ], 500);
         }
     }
 }

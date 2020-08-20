@@ -20,7 +20,7 @@ class UsersController extends Controller
             return response()->json([
                 'status' => 'ok',
                 'payload' => $users
-            ]);
+            ], 200);
         } catch (QueryException $e) {
             return response()->json([
                 'status' => 'fail',
@@ -35,7 +35,7 @@ class UsersController extends Controller
             return response()->json([
                 'status' => 'fail',
                 'message' => 'Please inform user id'
-            ]);
+            ], 400);
         }
 
         try {
@@ -44,7 +44,7 @@ class UsersController extends Controller
             return response()->json([
                 'status' => 'ok',
                 'payload' => $user
-            ]);
+            ], 200);
         } catch (QueryException $e) {
             return response()->json([
                 'status' => 'fail',

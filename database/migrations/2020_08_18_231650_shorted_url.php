@@ -13,7 +13,7 @@ class ShortedUrl extends Migration
         Schema::create($this->table, function(Blueprint $table) {
             $table->increments('id');
             $table->string('user_id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('original_url');
             $table->bigInteger('access');
             $table->timestamps();

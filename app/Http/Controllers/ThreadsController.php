@@ -31,7 +31,7 @@ class ThreadsController extends Controller
             if (empty($forum)) {
                 return response()->json([
                     'status' => 'fail',
-                    'message' => 'Can\'t find specified forum'
+                    'message' => 'Forum not found'
                 ], 404);
             }
 
@@ -40,7 +40,10 @@ class ThreadsController extends Controller
                 ->take($page)
                 ->get();
 
-            return response()->json($threads, 200);
+            return response()->json([
+                'status' => 'ok',
+                'payload' => $threads
+            ], 200);
         } catch (QueryException $e) {
             return response()->json([
                 'status' => 'fail',
@@ -64,11 +67,14 @@ class ThreadsController extends Controller
             if (empty($thread)) {
                 return response()->json([
                     'status' => 'fail',
-                    'message' => 'Can\'t find specified thread'
+                    'message' => 'Thread not found'
                 ], 404);
             }
 
-            return response()->json($thread, 200);
+            return response()->json([
+                'status' => 'ok',
+                'payload' => $thread
+            ], 200);
         } catch (QueryException $e) {
             return response()->json([
                 'status' => 'fail',
@@ -168,7 +174,7 @@ class ThreadsController extends Controller
                 return response()->json([
                     'status' => 'fail',
                     'message' => 'Can\'t update this thread, are there deleted?'
-                ]);
+                ], 500);
             }
 
             $updated = Post::where('parent_id', $thread_id)->update([
@@ -179,7 +185,7 @@ class ThreadsController extends Controller
                 return response()->json([
                     'status' => 'fail',
                     'message' => 'Can\'t update thread body, are there deleted?'
-                ]);
+                ], 500);
             }
 
             return response()->json([

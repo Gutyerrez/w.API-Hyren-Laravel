@@ -12,6 +12,36 @@ use Misc\Utils\FormValidator;
 class UsersGroupsDueController extends Controller
 {
 
+    public function show(Request $request, $user_id) {
+        if (empty($user_id)) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => 'Please inform user id'
+            ], 400);
+        }
+
+        try {
+            $user = User::with('groups');
+
+            if (empty($user)) {
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => 'User not found'
+                ], 404);
+            }
+
+            return response()->json([
+                'status' => 'ok',
+                'payload' => $user
+            ], 200);
+        } catch (QueryException $e) {
+            return response()->json([
+                'status' => 'fail',
+                'message' => INTERNAL_SERVER_ERROR
+            ], 500);
+        }
+    }
+
     public function store(Request $request)
     {
         $user_id = $request->input('user_id');
@@ -30,7 +60,7 @@ class UsersGroupsDueController extends Controller
             if (empty($group)) {
                 return response()->json([
                     'status' => 'fail',
-                    'message' => 'Can\'t find group'
+                    'message' => 'Group not found'
                 ], 404);
             }
 
@@ -39,7 +69,7 @@ class UsersGroupsDueController extends Controller
             if (empty($user)) {
                 return response()->json([
                     'status' => 'fail',
-                    'message' => 'Can\'t find user'
+                    'message' => 'User not found'
                 ], 404);
             }
 
@@ -51,7 +81,7 @@ class UsersGroupsDueController extends Controller
             return response()->json([
                 'status' => 'ok',
                 'payload' => $userGroupDue
-            ]);
+            ], 201);
         } catch (QueryException $e) {
             return response()->json([
                 'status' => 'fail',
