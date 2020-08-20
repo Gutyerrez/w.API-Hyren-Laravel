@@ -11,23 +11,12 @@ class ChangelogsController extends Controller
 
     public function index(Request $request)
     {
-        $offset = $request->query('offset', 0);
-        $page = $request->query('page', 10);
-
         try {
-            $changelogs = Changelog::skip($offset)
-                ->take($page)
-                ->get();
-            $count = Changelog::count();
-
-            $payload = [
-                'items' => $changelogs,
-                'count' => $count
-            ];
+            $changelogs = Changelog::paginate(DEFAULT_PER_PAGE);
 
             return response()->json([
                 'status' => 'ok',
-                'payload' => $payload
+                'payload' => $changelogs
             ], 200);
         } catch (QueryException $e) {
             return response()->json([

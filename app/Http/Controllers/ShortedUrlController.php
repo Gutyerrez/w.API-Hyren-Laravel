@@ -12,23 +12,12 @@ class ShortedUrlController extends Controller
 
     public function index(Request $request)
     {
-        $offset = $request->query('offset', 0);
-        $page = $request->query('page', 10);
-
         try {
-            $shorted_urls = ShortedUrl::skip($offset)
-                ->take($page)
-                ->get();
-            $count = ShortedUrl::count();
-
-            $payload = [
-                'items' => $shorted_urls,
-                'count' => $count
-            ];
+            $shorted_urls = ShortedUrl::paginate(DEFAULT_PER_PAGE);
 
             return response()->json([
                 'status' => 'ok',
-                'payload' => $payload
+                'payload' => $shorted_urls
             ], 200);
         } catch (QueryException $e) {
             return response()->json([

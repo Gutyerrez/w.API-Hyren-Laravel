@@ -14,9 +14,6 @@ class PostsController extends Controller
 
     public function index(Request $request, $thread_id)
     {
-        $offset = $request->query('offset', 0);
-        $page = $request->query('page', 10);
-
         if (empty($thread_id)) {
             return response()->json([
                 'status' => 'fail',
@@ -26,20 +23,11 @@ class PostsController extends Controller
 
         try {
             $posts = Post::where('thread_id', $thread_id)
-                ->skip($offset)
-                ->take($page)
-                ->get();
-            $count = Post::where('thread_id', $thread_id)
-                ->count();
-
-            $payload = [
-                'items' => $posts,
-                'count' => $count
-            ];
+                ->paginate(DEFAULT_PER_PAGE);
 
             return response()->json([
                 'status' => 'ok',
-                'payload' => $payload
+                'payload' => $posts
             ], 200);
         } catch (QueryException $e) {
             return response()->json([

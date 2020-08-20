@@ -12,23 +12,12 @@ class UsersPunishmentsController extends Controller
 
     public function index(Request $request)
     {
-        $offset = $request->query('offset', 0);
-        $page = $request->query('page', 10);
-
         try {
-            $punishments = UsersPunishment::skip($offset)
-                ->take($page)
-                ->get();
-            $count = UsersPunishment::count();
-
-            $payload = [
-                'items' => $punishments,
-                'count' => $count
-            ];
+            $punishments = UsersPunishment::paginate(DEFAULT_PER_PAGE);
 
             return response()->json([
                 'status' => 'ok',
-                'payload' => $payload
+                'payload' => $punishments
             ]);
         } catch (QueryException $e) {
             return response()->json([

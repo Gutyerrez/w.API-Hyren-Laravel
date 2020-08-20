@@ -15,9 +15,6 @@ class ThreadsController extends Controller
 
     public static function index(Request $request, $forum_id)
     {
-        $offset = $request->query('offset', 0);
-        $page = $request->query('page', 10);
-
         if (empty($forum_id)) {
             return response()->json([
                 'status' => 'fail',
@@ -36,20 +33,11 @@ class ThreadsController extends Controller
             }
 
             $threads = Thread::where('forum_id', $forum_id)
-                ->skip($offset)
-                ->take($page)
-                ->get();
-
-            $count = Thread::where('forum_id', $forum_id)->count();
-
-            $payload = [
-                'items' => $threads,
-                'count' => $count
-            ];
+                ->paginate(DEFAULT_PER_PAGE);
 
             return response()->json([
                 'status' => 'ok',
-                'payload' => $payload
+                'payload' => $threads
             ], 200);
         } catch (QueryException $e) {
             return response()->json([

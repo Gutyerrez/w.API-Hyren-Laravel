@@ -11,11 +11,8 @@ class UsersController extends Controller
 
     public function index(Request $request)
     {
-        $offset = $request->query('offset', 0);
-        $page = $request->query('page', 10);
-
         try {
-            $users = User::skip($offset)->take($page)->get();
+            $users = User::paginate(10);
 
             return response()->json([
                 'status' => 'ok',

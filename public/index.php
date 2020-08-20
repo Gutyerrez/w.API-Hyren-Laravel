@@ -2,6 +2,7 @@
 
 define('LARAVEL_START', microtime(true));
 define('INTERNAL_SERVER_ERROR', 'Internal server error');
+define('DEFAULT_PER_PAGE', 10);
 
 require __DIR__.'/../vendor/autoload.php';
 
