@@ -52,6 +52,8 @@ Route::middleware('authentication')->group(function() {
     Route::prefix('/forums/{category_id}', 'ForumsController@index');
 
     Route::prefix('/threads')->group(function() {
+        Route::get('/promoted', 'PromotedThreadsController@index');
+
         Route::get('/{forum_id}', 'ThreadsController@index');
 
         Route::get('/{forum_id}/{thread_id}', 'ThreadsController@show');

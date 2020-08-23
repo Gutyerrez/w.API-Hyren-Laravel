@@ -24,11 +24,17 @@ class Apps extends Migration
                 'LOBBY',
                 'SERVER_SPAWN',
                 'SERVER_VIP',
-                'SERVER_WORLD_SPAWN',
                 'SERVER_WORLD_NORTH',
                 'SERVER_WORLD_WEST',
                 'SERVER_WORLD_SOUTH',
-                'SERVER_WORLD_EAST'
+                'SERVER_WORLD_EAST',
+                'SERVER_END',
+                'SERVER_MINE',
+                'SERVER_ARENA',
+                'SERVER_WAR',
+                'SERVER_DUNGEON',
+                'SERVER_TESTS',
+                'SERVER_GENERIC'
             ]);
             $table->string('server');
             $table->string('restrict_join')->default(Group::MANAGER()->key);

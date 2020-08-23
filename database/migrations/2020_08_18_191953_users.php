@@ -17,7 +17,7 @@ class Users extends Migration
             $table->boolean('two_factor_authentication_enabled')->default(false);
             $table->string('two_factor_authentication_code', 8)->nullable()->unique();
             $table->string('twitter_access_token', 48)->nullable()->unique();
-            $table->string('twitter_token_scret', 40)->nullable()->unique();
+            $table->string('twitter_token_secret', 40)->nullable()->unique();
             $table->string('last_address');
             $table->integer('last_lobby_id')->nullable();
             $table->timestamp('last_login')->nullable();

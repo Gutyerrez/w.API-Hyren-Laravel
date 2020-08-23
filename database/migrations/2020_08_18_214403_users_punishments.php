@@ -21,7 +21,7 @@ class UsersPunishments extends Migration
                 'MUTE'
             ]);
             $table->string('category');
-            $table->bigInteger('durations');
+            $table->bigInteger('duration');
             $table->string('custom_reason')->nullable();
             $table->string('proof')->nullable();
             $table->string('unban_staffer_id', 36)->nullable();
