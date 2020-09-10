@@ -8,7 +8,7 @@ use App\Extensions\Permission\Group;
 
 class Apps extends Migration
 {
-    protected $table = 'apps';
+    protected $table = 'applications';
 
     public function up()
     {
@@ -22,6 +22,7 @@ class Apps extends Migration
             $table->enum('type', [
                 'PROXY',
                 'LOBBY',
+                'BANNED',
                 'SERVER_SPAWN',
                 'SERVER_VIP',
                 'SERVER_WORLD_NORTH',

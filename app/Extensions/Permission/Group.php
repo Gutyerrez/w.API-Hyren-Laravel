@@ -88,8 +88,8 @@ final class Group extends Enum
     ];
 
     const DEFAULT = [
-        'name' => 'MEMBER',
-        'display_name' => 'Member',
+        'name' => 'DEFAULT',
+        'display_name' => 'Default',
         'prefix' => '',
         'color' => '#AAAAAA',
         'priority' => 0,
