@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 use App\Extensions\Permission\Group;
 
-class Apps extends Migration
+class Applications extends Migration
 {
     protected $table = 'applications';
 
@@ -37,10 +37,10 @@ class Apps extends Migration
                 'SERVER_TESTS',
                 'SERVER_GENERIC'
             ]);
-            $table->string('server');
+            $table->string('server_name');
             $table->string('restrict_join')->default(Group::MANAGER()->key);
 
-            $table->foreign('server')->references('name')->on('servers')
+            $table->foreign('server_name')->references('name')->on('servers')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
         });
