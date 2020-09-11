@@ -19,7 +19,7 @@ class Applications extends Migration
             $table->integer('slots')->default(10);
             $table->string('address');
             $table->integer('port');
-            $table->enum('type', [
+            $table->enum('application_type', [
                 'PROXY',
                 'LOBBY',
                 'BANNED',

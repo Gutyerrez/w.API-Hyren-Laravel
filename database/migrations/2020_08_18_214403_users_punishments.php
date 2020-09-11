@@ -15,19 +15,20 @@ class UsersPunishments extends Migration
             $table->string('user_id', 36);
             $table->string('staffer_id', 36);
             $table->timestamp('start_time')->nullable();
-            $table->enum('type', [
+            $table->enum('punish_type', [
                 'BAN',
                 'TEMP_BAN',
-                'MUTE'
+                'MUTE',
+                'DISCORD_MUTE'
             ]);
-            $table->string('category');
+            $table->string('punish_category_name')->nullable();
             $table->bigInteger('duration');
             $table->string('custom_reason')->nullable();
             $table->string('proof')->nullable();
-            $table->string('unban_staffer_id', 36)->nullable();
-            $table->timestamp('unban_time')->nullable();
-            $table->string('unban_reason')->nullable();
-            $table->string('unban_category')->nullable();
+            $table->string('revoke_staffer_id', 36)->nullable();
+            $table->timestamp('revoke_time')->nullable();
+            $table->string('revoke_reason')->nullable();
+            $table->string('revoke_category')->nullable();
             $table->boolean('hidden')->default(false);
             $table->boolean('perpetual')->default(false);
             $table->timestamps();
@@ -40,15 +41,15 @@ class UsersPunishments extends Migration
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
 
-            $table->foreign('unban_staffer_id')->references('id')->on('users')
+            $table->foreign('revoke_staffer_id')->references('id')->on('users')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
 
-            $table->foreign('category')->references('name')->on('punish_categories')
+            $table->foreign('revoke_category_name')->references('name')->on('punish_categories')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
 
-            $table->foreign('unban_category')->references('name')->on('revoke_categories')
+            $table->foreign('revoke_category_name')->references('name')->on('revoke_categories')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
         });
