@@ -60,24 +60,6 @@ final class Group extends Enum
         'tab_list_order' => 6
     ];
 
-    const MVP = [
-        'name' => 'MVP',
-        'display_name' => 'MVP',
-        'prefix' => '[MVP] ',
-        'color' => '#55FFFF',
-        'priority' => 70,
-        'tab_list_order' => 7
-    ];
-
-    const VIP = [
-        'name' => 'VIP',
-        'display_name' => 'VIP',
-        'prefix' => '[VIP] ',
-        'color' => '#FFFF55',
-        'priority' => 65,
-        'tab_list_order' => 8
-    ];
-
     const BUILDER = [
         'name' => 'BUILDER',
         'display_name' => 'Builder',
@@ -85,6 +67,24 @@ final class Group extends Enum
         'color' => '#FF55FF',
         'priority' => 60,
         'tab_list_order' => 9
+    ];
+
+    const ULTIMATE = [
+        'name' => 'ULTIMATE',
+        'display_name' => 'Ultimate',
+        'prefix' => '[Ultimate] ',
+        'color' => '#55FFFF',
+        'priority' => 70,
+        'tab_list_order' => 7
+    ];
+
+    const PREMIUM = [
+        'name' => 'PREMIUM',
+        'display_name' => 'Premium',
+        'prefix' => '[Premium] ',
+        'color' => '#FFFF55',
+        'priority' => 65,
+        'tab_list_order' => 8
     ];
 
     const DEFAULT = [
@@ -95,4 +95,5 @@ final class Group extends Enum
         'priority' => 0,
         'tab_list_order' => 100
     ];
+
 }

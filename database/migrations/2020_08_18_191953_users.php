@@ -19,8 +19,8 @@ class Users extends Migration
             $table->string('twitter_access_token', 48)->nullable()->unique();
             $table->string('twitter_token_secret', 40)->nullable()->unique();
             $table->string('last_address');
-            $table->integer('last_lobby_id')->nullable();
-            $table->timestamp('last_login')->nullable();
+            $table->string('last_lobby_name', 255)->nullable();
+            $table->timestamp('last_login_at')->nullable();
             $table->timestamps();
         });
     }
