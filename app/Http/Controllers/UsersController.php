@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
         try {
             $users = User::paginate(10);

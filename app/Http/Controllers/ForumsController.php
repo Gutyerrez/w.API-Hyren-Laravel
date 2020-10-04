@@ -37,7 +37,7 @@ class ForumsController extends Controller
             ], 200);
         } catch (QueryException $e) {
             return response()->json([
-                'status' => 'ok',
+                'status' => 'fail',
                 'message' => INTERNAL_SERVER_ERROR
             ], 500);
         }

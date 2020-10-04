@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Extensions\Permission\Group;
-use App\Models\Group as GroupModel;
+use App\Extensions\Permission\Group as PermissionGroup;
+use App\Models\Group;
 use Illuminate\Database\QueryException;
 
 class StaffController extends Controller
@@ -12,8 +12,8 @@ class StaffController extends Controller
     public function index()
     {
         try {
-            $users = GroupModel::with('users')
-                ->where('priority', '>=', Group::HELPER['priority'])
+            $users = Group::with('users')
+                ->where('priority', '>=', PermissionGroup::HELPER['priority'])
                 ->get([
                     'name', 'display_name', 'color',
                 ]);
