@@ -209,7 +209,7 @@ class ThreadsController extends Controller
             $deleted = Thread::where('id', $thread_id)
                 ->delete();
 
-            if ($deleted < 1) {
+            if (empty($deleted)) {
                 return response()->json([
                     'status' => 'fail',
                     'message' => 'Can\'t delete this thread, are there deleted?'

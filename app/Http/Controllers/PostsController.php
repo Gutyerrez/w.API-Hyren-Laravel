@@ -55,7 +55,8 @@ class PostsController extends Controller
         }
 
         try {
-            $user = User::where('id', $user_id)->first();
+            $user = User::where('id', $user_id)
+                ->first();
 
             if (empty($user)) {
                 return response()->json([
@@ -97,9 +98,10 @@ class PostsController extends Controller
         $body = $request->input('body');
 
         try {
-            $updated = Post::where('id', $id)->update([
-                'body' => $body
-            ]);
+            $updated = Post::where('id', $id)
+                ->update([
+                    'body' => $body
+                ]);
 
             if ($updated != 1) {
                 return response()->json([
@@ -122,9 +124,10 @@ class PostsController extends Controller
     public function delete(Request $request, $id)
     {
         try {
-            $updated = Post::where('id', $id)->delete();
+            $deleted = Post::where('id', $id)
+                ->delete();
 
-            if ($updated != 1) {
+            if ($deleted != 1) {
                 return response()->json([
                     'status' => 'fail',
                     'message' => 'Post not found'

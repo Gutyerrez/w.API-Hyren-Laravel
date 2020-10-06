@@ -107,9 +107,9 @@ class CategoriesController extends Controller
         $id = $request->input('id');
 
         try {
-            $updated = Category::where('id', $id)->delete();
+            $deleted = Category::where('id', $id)->delete();
 
-            if ($updated < 1) {
+            if (empty($deleted)) {
                 return response()->json([
                     'status' => 'fail',
                     'message' => 'Category not found'

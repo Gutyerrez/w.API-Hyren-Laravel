@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Feature extends Model
+class Article extends Model
 {
 
     protected $fillable = [
-        'title', 'sub_title', 'description', 'external_url', 'image'
+        'thread_id', 'post_id'
     ];
 
 }

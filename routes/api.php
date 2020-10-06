@@ -52,8 +52,6 @@ Route::middleware('authentication')->group(function() {
     Route::prefix('/forums/{category_id}', 'ForumsController@index');
 
     Route::prefix('/threads')->group(function() {
-        Route::get('/promoted', 'PromotedThreadsController@index');
-
         Route::get('/{forum_id}', 'ThreadsController@index');
 
         Route::get('/{forum_id}/{thread_id}', 'ThreadsController@show');
@@ -67,6 +65,22 @@ Route::middleware('authentication')->group(function() {
         Route::resource('/posts', 'PostsController')->only([
             'index', 'store', 'update', 'delete'
         ]);
+    });
+
+    Route::prefix('/articles')->group(function() {
+        Route::get('/', 'ArticlesController@index');
+
+        Route::post('/create', 'ArticlesController@store');
+
+        Route::delete('/delete/{thread_id}', 'ArticlesController@delete');
+    });
+
+    Route::prefix('/featureds')->group(function() {
+        Route::get('/', 'FeaturedsController@index');
+
+        Route::post('/create', 'FeaturedsController@store');
+
+        Route::delete('/delete/{id}', 'FeaturedsController@delete');
     });
 
     Route::resource('/shorts/urls', 'ShortedUrlController')->only([
