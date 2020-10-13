@@ -11,4 +11,22 @@ class Article extends Model
         'thread_id', 'post_id'
     ];
 
+    function post()
+    {
+        return $this->hasOne(
+            Post::class,
+            'id',
+            'post_id'
+        );
+    }
+
+    function thread()
+    {
+        return $this->hasOne(
+            Thread::class,
+            'id',
+            'thread_id'
+        );
+    }
+
 }

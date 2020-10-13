@@ -12,7 +12,7 @@ Route::get('/punishments/lasts', 'UsersPunishmentsController@index');
 
 Route::post('/authentication/generate', 'AuthenticationController@store');
 
-Route::middleware('authentication')->group(function() {
+// Route::middleware('authentication')->group(function() {
     Route::prefix('/users')->group(function() {
         Route::get('/', 'UsersController@index');
 
@@ -86,4 +86,11 @@ Route::middleware('authentication')->group(function() {
     Route::resource('/shorts/urls', 'ShortedUrlController')->only([
         'index', 'show', 'store', 'update', 'delete'
     ]);
+// });
+
+Route::fallback(function() {
+    return response()->json([
+        'status' => 'fail',
+        'message' => 'Page not found'
+    ], 404);
 });

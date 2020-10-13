@@ -12,9 +12,8 @@ class FeaturedsController extends Controller
     public function index()
     {
         try {
-            $featureds = Feature::all()
-                ->paginate(3)
-                ->orderBy('created_at', 'desc');
+            $featureds = Featured::orderBy('id', 'desc')
+                ->paginate(3);
 
             return response()->json([
                 'status' => 'ok',
@@ -43,7 +42,7 @@ class FeaturedsController extends Controller
         try {
             $featured = Featured::create([
                 'title' => $title,
-                'sub_title' => $sub_title,
+                'sub_title' => $subTitle,
                 'description' => $description,
                 'external_url' => $externalURL,
                 'image_url' => $imageURL

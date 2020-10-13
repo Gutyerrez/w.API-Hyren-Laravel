@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Article;
+use App\Models\Thread;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,9 @@ class ArticlesController extends Controller
     public function index()
     {
         try {
-            $articles = Article::with('post')
-                ->paginate(1);
+            $articles = Article::with('thread')
+                ->with('post')
+                ->paginate(10);
 
             return response()->json([
                 'status' => 'ok',
@@ -33,9 +35,13 @@ class ArticlesController extends Controller
         $threadId = $request->input('thread_id');
 
         try {
+            $thread = Thread::where('thread_id', $threadId);
+
+            $userId = $thread['user_id'];
+
             $post = Post::where('thread_id', $threadId)
                 ->where('user_id', $userId)
-                ->orderBy('created_at', 'desc')
+                ->orderBy('created_at', 'asc')
                 ->first();
 
             return response()->json([
@@ -53,7 +59,7 @@ class ArticlesController extends Controller
         }
     }
 
-    public function delete(Request $request, $id)
+    public function delete($id)
     {
         try {
             $deleted = Article::where('thread_id', $id)

@@ -7,13 +7,14 @@ use App\Models\AccessToken;
 use Closure;
 use DateTime;
 use Exception;
-use Illuminate\Support\Facades\Log;
 use Misc\Utils\StringUtils;
 
 class AuthenticationMiddleware
 {
     public function handle($request, Closure $next)
     {
+        return $next($request);
+
         $token = $request->header('authorization');
 
         if (!AuthenticationMiddleware::encryptOrDecrypt('decrypt', $token)) {
